@@ -1,4 +1,5 @@
 let body=document.getElementById('body');
+body.addEventListener('change',onClick);
 
 let sourceData=fetch('data.json').then((response)=>{
     return response.json();
@@ -6,7 +7,7 @@ let sourceData=fetch('data.json').then((response)=>{
 
 sourceData.then((data)=>{    
     createNode(body,data);    
-    body.addEventListener('click',onClick);
+
 });
 
 function onClick(e){
@@ -23,7 +24,7 @@ function onClick(e){
 function onCheck(e){      
     [...e.children].forEach(e=>{
         if(e.nodeName==='INPUT'){
-            e.setAttribute('checked',true);
+            e.checked=true;
         }
         else if (e.nodeName==='DIV'){
             onCheck(e);
@@ -34,8 +35,8 @@ function onCheck(e){
 
 function onUncheck(e){      
     [...e.children].forEach(e=>{
-        if(e.nodeName==='INPUT'){
-            e.removeAttribute('checked',true);
+        if(e.nodeName==='INPUT'){            
+            e.checked=false;
         }
         else if (e.nodeName==='DIV'){
             onUncheck(e);
